@@ -11,3 +11,15 @@ export const trackReducer = (state = initialState, { type, payload }) => {
       return state;
   }
 };
+
+export const selectedTrackReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SELECTED_TRACK:
+      return { ...state, ...payload };
+
+    case ActionTypes.REMOVE_TRACK:
+      return {};
+    default:
+      return state;
+  }
+};

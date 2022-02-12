@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import { trackReducer } from "./trackReducer";
+import { selectedTrackReducer, trackReducer } from "./trackReducer";
 
 export const reducers = combineReducers({
   allTracks: trackReducer,
+  selectedTrack: selectedTrackReducer,
 });

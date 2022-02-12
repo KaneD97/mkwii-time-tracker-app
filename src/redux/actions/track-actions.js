@@ -6,3 +6,16 @@ export const setTracks = (tracks) => {
     payload: tracks,
   };
 };
+
+export const setSelectedTrack = (track) => {
+  return {
+    type: ActionTypes.SELECTED_TRACK,
+    payload: track,
+  };
+};
+
+export const removeSelectedTrack = () => {
+  return {
+    type: ActionTypes.REMOVE_TRACK,
+  };
+};
