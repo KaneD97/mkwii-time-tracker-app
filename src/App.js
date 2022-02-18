@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./containers/Header";
 import TrackTimesComponent from "./containers/TrackTimesComponent";
 import PersonalRecordTimes from "./containers/PersonalRecordTimes";
+import AddTime from "./containers/AddTime";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/PRs" element={<PersonalRecordTimes />}></Route>
           <Route path="/track/:id" element={<TrackTimesComponent />}></Route>
+          <Route path="/add" element={<AddTime />}></Route>
         </Routes>
       </Router>
     </div>
