@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from "semantic-ui-react";
+import { setTracks } from "../redux/actions/track-actions";
+import data from "../data/tracks.json";
 
 const AddTime = () => {
-  const [tracks] = useState([{ key: "Lol", value: "hehe", text: "Mushroomz" }]);
   const [time, setTime] = useState("");
+  const tracks = useSelector((state) => state.allTracks.tracks).map(
+    (track) => ({ key: track.id, value: track.name, text: track.name })
+  );
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  const dispatch = useDispatch();
+  const getTracks = () => {
+    dispatch(setTracks(data));
+  };
+
+  useEffect(() => {
+    getTracks();
+  }, []);
 
   return (
     <div>
