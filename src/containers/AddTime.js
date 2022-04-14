@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from "semantic-ui-react";
 import { setTracks } from "../redux/actions/track-actions";
 import data from "../data/tracks.json";
+import { getDateTimeToday } from "../utils";
 
 const AddTime = () => {
   const [time, setTime] = useState("");
@@ -21,8 +22,9 @@ const AddTime = () => {
       alert("Forgot to select track!");
     } else {
       alert(`Your time ${time} has been submitted! for ${track}`);
+      const dateAchieved = getDateTimeToday();
       const trackId = tracks.find((t) => t.value === track).key;
-      const formData = { time, track, trackId };
+      const formData = { time, track, trackId, dateAchieved };
       console.log(formData);
     }
   };
