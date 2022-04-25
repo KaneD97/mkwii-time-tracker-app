@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dropdown } from "semantic-ui-react";
 import { setTracks } from "../redux/actions/track-actions";
-import data from "../data/tracks.json";
 import { getDateTimeToday } from "../utils";
+import axios from "axios";
 
 const AddTime = () => {
   const [time, setTime] = useState("");
@@ -30,8 +30,12 @@ const AddTime = () => {
   };
 
   const dispatch = useDispatch();
-  const getTracks = () => {
-    dispatch(setTracks(data));
+
+  const getTracks = async () => {
+    const response = await axios
+      .get("http://127.0.0.1:5500/mock_data/tracks.json")
+      .catch((err) => console.log(err));
+    dispatch(setTracks(response.data));
   };
 
   const handleInputChange = ({ target }) => {

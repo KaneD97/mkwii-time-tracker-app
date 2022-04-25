@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import TrackComponent from "./TrackComponent";
-import data from "../data/tracks.json";
 import { useDispatch } from "react-redux";
 import { setTracks } from "../redux/actions/track-actions";
+import axios from "axios";
 
 const PersonalRecordTimes = () => {
   const dispatch = useDispatch();
-  const getTracks = () => {
-    dispatch(setTracks(data));
+  const getTracks = async () => {
+    const response = await axios
+      .get("http://127.0.0.1:5500/mock_data/tracks.json")
+      .catch((err) => console.log(err));
+    dispatch(setTracks(response.data));
   };
 
   useEffect(() => {
