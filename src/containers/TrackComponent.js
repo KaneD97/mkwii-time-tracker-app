@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 const TrackComponent = () => {
   const tracks = useSelector((state) => state.allTracks.tracks);
   const renderedTracks = tracks.map((track) => {
-    const { name, id } = track;
+    const { name, track_id } = track;
 
     return (
       <div className="card">
-        <Link to={`/track/${id}`}>
+        <Link to={`/track/${track_id}`}>
           <div className="image">
-            <img src={require(`../data/images/track_${id}.png`)} />
+            <img src={require(`../data/images/track_${track_id}.png`)} />
           </div>
           <div className="content">
             <div className="header">{name}</div>
