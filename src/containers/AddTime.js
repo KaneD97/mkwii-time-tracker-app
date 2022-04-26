@@ -10,8 +10,18 @@ const AddTime = () => {
   const [track, setTrack] = useState("");
 
   const tracks = useSelector((state) => state.allTracks.tracks).map(
-    (track) => ({ key: track.id, value: track.name, text: track.name })
+    (track) => ({
+      key: track.id,
+      value: track.name,
+      text: track.name,
+      has_shortcut: track.has_shortcut,
+    })
   );
+
+  const shortcutOptions = [
+    { key: 0, value: "Shortcut", text: "Shortcut" },
+    { key: 1, value: "Non shortcut", text: "Non shortcut" },
+  ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,10 +31,9 @@ const AddTime = () => {
     } else if (track === "") {
       alert("Forgot to select track!");
     } else {
-      alert(`Your time ${time} has been submitted! for ${track}`);
+      alert(`Your time ${time} has been submitted! for ${track.value}`);
       const dateAchieved = getDateTimeToday();
-      const trackId = tracks.find((t) => t.value === track).key;
-      const formData = { time, track, trackId, dateAchieved };
+      const formData = { time, name: track.value, id: track.key, dateAchieved };
       console.log(formData);
     }
   };
@@ -46,7 +55,7 @@ const AddTime = () => {
   };
 
   const handleTrackChange = ({ target }) => {
-    const selectedTrack = target.innerText;
+    const selectedTrack = tracks.find((t) => t.value === target.innerText);
     setTrack(selectedTrack);
   };
 
@@ -67,6 +76,15 @@ const AddTime = () => {
           onChange={handleTrackChange}
           required
         />
+        {track.has_shortcut && (
+          <Dropdown
+            placeholder="Select format"
+            search
+            selection
+            options={shortcutOptions}
+            required
+          />
+        )}
         <div className="ui action input">
           <input
             type="text"
