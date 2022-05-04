@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import TrackTimesList from "../components/TrackTimesList";
 import {
   removeSelectedTrack,
   setSelectedTrack,
 } from "../redux/actions/track-actions";
 
-const TrackTimesComponent = () => {
+const TrackTimes = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const track = useSelector((state) => state.selectedTrack);
@@ -23,15 +24,7 @@ const TrackTimesComponent = () => {
     };
   }, [id]);
 
-  return (
-    <div>
-      {Object.keys(track).length === 0 ? (
-        <h1>Loading track times</h1>
-      ) : (
-        <h1>{track.name}</h1>
-      )}
-    </div>
-  );
+  return <TrackTimesList track={track} />;
 };
 
-export default TrackTimesComponent;
+export default TrackTimes;

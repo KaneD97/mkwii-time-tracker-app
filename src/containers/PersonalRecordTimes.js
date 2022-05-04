@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import TrackComponent from "./TrackComponent";
+import Tracks from "./Tracks";
 import { useDispatch } from "react-redux";
 import { setTracks } from "../redux/actions/track-actions";
 import axios from "axios";
@@ -20,7 +20,7 @@ const PersonalRecordTimes = () => {
   return (
     <div>
       <h1>World Record Times!</h1>
-      <TrackComponent></TrackComponent>
+      <Tracks></Tracks>
     </div>
   );
 };
