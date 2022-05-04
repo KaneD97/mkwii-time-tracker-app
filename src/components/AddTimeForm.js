@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import { getDateTimeToday } from "../utils";
+import ShortcutBreakdown from "../containers/ShortcutBreakdown";
 
-const AddTimeForm = ({ tracks }) => {
-  const [track, setTrack] = useState("");
+const AddTimeForm = ({ tracks, handleTrackChange, track }) => {
   const [time, setTime] = useState("");
-
   const shortcutOptions = [
     { key: 0, value: "Shortcut", text: "Shortcut" },
     { key: 1, value: "Non shortcut", text: "Non shortcut" },
@@ -36,11 +35,6 @@ const AddTimeForm = ({ tracks }) => {
     if (!lettersRegExp.test(target.value)) {
       setTime(target.value);
     }
-  };
-
-  const handleTrackChange = ({ target }) => {
-    const selectedTrack = tracks.find((t) => t.value === target.innerText);
-    setTrack(selectedTrack);
   };
 
   return (
@@ -76,6 +70,7 @@ const AddTimeForm = ({ tracks }) => {
           Save time
         </button>
       </div>
+      <ShortcutBreakdown />
     </form>
   );
 };

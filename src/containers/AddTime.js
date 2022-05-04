@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddTimeForm from "../components/AddTimeForm";
-import { setTracks } from "../redux/actions/track-actions";
+import { setSelectedTrack, setTracks } from "../redux/actions/track-actions";
 import axios from "axios";
 
 const AddTime = () => {
@@ -13,6 +13,7 @@ const AddTime = () => {
       has_shortcut: track.has_shortcut,
     })
   );
+  const [track, setTrack] = useState("");
 
   const dispatch = useDispatch();
 
@@ -23,6 +24,12 @@ const AddTime = () => {
     dispatch(setTracks(response.data));
   };
 
+  const handleTrackChange = ({ target }) => {
+    const selectedTrack = tracks.find((t) => t.value === target.innerText);
+    setTrack(selectedTrack);
+    dispatch(setSelectedTrack(selectedTrack));
+  };
+
   useEffect(() => {
     getTracks();
   }, []);
@@ -30,7 +37,11 @@ const AddTime = () => {
   return (
     <div>
       <h1>Add Time</h1>
-      <AddTimeForm tracks={tracks}></AddTimeForm>
+      <AddTimeForm
+        tracks={tracks}
+        track={track}
+        handleTrackChange={handleTrackChange}
+      ></AddTimeForm>
     </div>
   );
 };
