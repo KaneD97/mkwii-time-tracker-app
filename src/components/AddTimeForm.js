@@ -70,7 +70,7 @@ const AddTimeForm = ({ tracks, handleTrackChange, track }) => {
           Save time
         </button>
       </div>
-      <ShortcutBreakdown />
+      <ShortcutBreakdown trackId={track.key} />
     </form>
   );
 };
