@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dropdown } from "semantic-ui-react";
+import { Button, Form, Input, Select } from "semantic-ui-react";
 import { getDateTimeToday } from "../utils";
 import ShortcutBreakdown from "../containers/ShortcutBreakdown";
 
@@ -38,40 +38,34 @@ const AddTimeForm = ({ tracks, handleTrackChange, track }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Dropdown
-        placeholder="Select track"
-        search
-        selection
-        options={tracks}
-        name="tracks"
-        onChange={handleTrackChange}
-        required
-      />
-      {track.has_shortcut && (
-        <Dropdown
-          placeholder="Select format"
-          search
-          selection
-          options={shortcutOptions}
-          required
+    <Form size="small" key="small" onSubmit={handleSubmit}>
+      <Form.Group widths="equal">
+        <Form.Field
+          control={Select}
+          label="Track"
+          options={tracks}
+          placeholder="Select track"
+          onChange={handleTrackChange}
         />
-      )}
-      <div className="ui action input">
-        <input
-          type="text"
+        {track.has_shortcut && (
+          <Form.Field
+            control={Select}
+            label="Format"
+            options={shortcutOptions}
+            placeholder="Select format"
+          />
+        )}
+        <Form.Field
+          control={Input}
+          label="Time"
           value={time}
           onChange={handleInputChange}
-          name="time"
           placeholder="Enter time in format MM:SS:mmm"
-          required
         />
-        <button className="ui button" type="submit">
-          Save time
-        </button>
-      </div>
+      </Form.Group>
+      <Form.Field control={Button} content="Submit" />
       <ShortcutBreakdown trackId={track.key} />
-    </form>
+    </Form>
   );
 };
 
