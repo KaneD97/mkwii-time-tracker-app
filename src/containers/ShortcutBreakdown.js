@@ -21,7 +21,7 @@ const ShortcutBreakdown = ({ trackId }) => {
     setFilteredShortcuts(
       shortcuts.filter((shortcut) => shortcut.track_id === trackId)
     );
-  }, [trackId]);
+  }, [trackId, shortcuts]);
 
   useEffect(() => {
     const shortcutBreakdownState = [];
@@ -51,7 +51,7 @@ const ShortcutBreakdown = ({ trackId }) => {
 
   return (
     <>
-      <h1>Shortcut breakdown for {trackId}</h1>
+      <h1>Shortcut breakdown</h1>
       {laps.map((lap) => (
         <React.Fragment key={lap}>
           <LapBreakdown

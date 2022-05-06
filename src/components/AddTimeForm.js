@@ -6,6 +6,8 @@ const AddTimeForm = ({
   tracks,
   track,
   time,
+  format,
+  handleFormat,
   handleTrackChange,
   handleSubmit,
   handleInputChange,
@@ -31,6 +33,7 @@ const AddTimeForm = ({
             label="Format"
             options={shortcutOptions}
             placeholder="Select format"
+            onChange={handleFormat}
           />
         )}
         <Form.Field
@@ -42,7 +45,7 @@ const AddTimeForm = ({
         />
       </Form.Group>
       <Form.Field control={Button} content="Submit" />
-      <ShortcutBreakdown trackId={track.key} />
+      {format === "shortcut" && <ShortcutBreakdown trackId={track.key} />}
     </Form>
   );
 };

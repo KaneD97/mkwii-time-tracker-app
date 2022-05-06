@@ -2,7 +2,7 @@ import React from "react";
 import { Checkbox, Form } from "semantic-ui-react";
 
 const LapShortcut = ({ shortcut, lapCount, updateLapShortcut }) => {
-  const checkboxClicked = (data) => {
+  const checkboxClicked = (e, data) => {
     updateLapShortcut(shortcut.shortcut_id, lapCount, data.checked);
   };
 

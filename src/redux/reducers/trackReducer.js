@@ -30,7 +30,7 @@ export const shortcutBreakdownReducer = (state = {}, { type, payload }) => {
       return { data: payload };
     case ActionTypes.LAP_SHORTCUT_UPDATED:
       return {
-        data: state.shortcutBreak.map((lapShortcut) => {
+        data: state.data.map((lapShortcut) => {
           if (
             lapShortcut.lap === payload.lapCount &&
             lapShortcut.shortcutId === payload.shortcutId

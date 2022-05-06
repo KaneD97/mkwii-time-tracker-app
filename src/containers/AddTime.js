@@ -19,6 +19,7 @@ const AddTime = () => {
   );
   const [track, setTrack] = useState("");
   const [time, setTime] = useState("");
+  const [format, setFormat] = useState("non_shortcut");
 
   const dispatch = useDispatch();
 
@@ -53,6 +54,7 @@ const AddTime = () => {
         id: track.key,
         dateAchieved,
         shortcutBreakdown,
+        format,
       };
       console.log(formData);
     }
@@ -63,6 +65,11 @@ const AddTime = () => {
     if (!lettersRegExp.test(target.value)) {
       setTime(target.value);
     }
+  };
+
+  const handleFormat = ({ target }) => {
+    const format = target.innerText.replace(" ", "_").toLowerCase();
+    setFormat(format);
   };
 
   useEffect(() => {
@@ -76,6 +83,8 @@ const AddTime = () => {
         tracks={tracks}
         track={track}
         time={time}
+        format={format}
+        handleFormat={handleFormat}
         handleTrackChange={handleTrackChange}
         handleSubmit={handleSubmit}
         handleInputChange={handleInputChange}
