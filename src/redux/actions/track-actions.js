@@ -19,3 +19,17 @@ export const removeSelectedTrack = () => {
     type: ActionTypes.REMOVE_TRACK,
   };
 };
+
+export const setShortcutBreakdown = (shortcutBreakdown) => {
+  return {
+    type: ActionTypes.SET_SHORTCUT_BREAKDOWN,
+    payload: shortcutBreakdown,
+  };
+};
+
+export const setLapShortcut = (lapShortcut) => {
+  return {
+    type: ActionTypes.LAP_SHORTCUT_UPDATED,
+    payload: lapShortcut,
+  };
+};
