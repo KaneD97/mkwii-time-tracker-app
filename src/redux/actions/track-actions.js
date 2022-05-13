@@ -20,6 +20,13 @@ export const removeSelectedTrack = () => {
   };
 };
 
+export const setTrackTimes = (trackTimes) => {
+  return {
+    type: ActionTypes.SET_TRACK_TIMES,
+    payload: trackTimes,
+  };
+};
+
 export const setShortcutBreakdown = (shortcutBreakdown) => {
   return {
     type: ActionTypes.SET_SHORTCUT_BREAKDOWN,

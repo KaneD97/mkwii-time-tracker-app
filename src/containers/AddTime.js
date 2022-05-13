@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddTimeForm from "../components/AddTimeForm";
-import { setSelectedTrack, setTracks } from "../redux/actions/track-actions";
-import axios from "axios";
-import { getDateTimeToday } from "../utils";
+import { setSelectedTrack } from "../redux/actions/track-actions";
+import { getDateTimeToday, getTracks } from "../utils";
 
 const AddTime = () => {
   const tracks = useSelector((state) => state.allTracks.tracks).map(
@@ -22,13 +21,6 @@ const AddTime = () => {
   const [format, setFormat] = useState("non_shortcut");
 
   const dispatch = useDispatch();
-
-  const getTracks = async () => {
-    const response = await axios
-      .get("http://127.0.0.1:5500/mock_data/tracks.json")
-      .catch((err) => console.log(err));
-    dispatch(setTracks(response.data));
-  };
 
   const handleTrackChange = ({ target }) => {
     const selectedTrack = tracks.find((t) => t.value === target.innerText);
@@ -73,7 +65,7 @@ const AddTime = () => {
   };
 
   useEffect(() => {
-    getTracks();
+    getTracks(dispatch);
   }, []);
 
   return (

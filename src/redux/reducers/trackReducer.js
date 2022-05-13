@@ -12,6 +12,16 @@ export const trackReducer = (state = initialState, { type, payload }) => {
   }
 };
 
+export const trackTimeReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SET_TRACK_TIMES:
+      return { ...state, trackTimes: payload };
+
+    default:
+      return state;
+  }
+};
+
 export const selectedTrackReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case ActionTypes.SELECTED_TRACK:
