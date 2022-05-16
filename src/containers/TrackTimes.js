@@ -30,14 +30,17 @@ const TrackTimes = () => {
   };
 
   useEffect(() => {
+    getSelectedTrack();
+  }, [tracks]);
+
+  useEffect(() => {
     if (id && id !== "") {
-      getSelectedTrack();
       getTracks(dispatch);
     }
     return () => {
       dispatch(removeSelectedTrack());
     };
-  }, [id, tracks]);
+  }, [id]);
 
   useEffect(() => {
     getTrackTimes();
