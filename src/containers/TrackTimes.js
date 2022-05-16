@@ -8,7 +8,7 @@ import {
   setSelectedTrack,
   setTrackTimes,
 } from "../redux/actions/track-actions";
-import { getTracks } from "../utils";
+import { getTracks, getTrackTimes } from "../utils";
 
 const TrackTimes = () => {
   const { id } = useParams();
@@ -20,13 +20,6 @@ const TrackTimes = () => {
   const getSelectedTrack = () => {
     const selectedTrack = tracks.find((track) => track.id.toString() === id);
     dispatch(setSelectedTrack(selectedTrack));
-  };
-
-  const getTrackTimes = async () => {
-    const response = await axios
-      .get("http://127.0.0.1:5500/mock_data/track_times.json")
-      .catch((err) => console.log(err));
-    dispatch(setTrackTimes(response.data));
   };
 
   useEffect(() => {

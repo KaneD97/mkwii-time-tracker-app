@@ -5,6 +5,7 @@ import TrackTimes from "./containers/TrackTimes";
 import PersonalRecordTimes from "./containers/PersonalRecordTimes";
 import AddTime from "./containers/AddTime";
 import Header from "./components/Header";
+import TrackTime from "./containers/TrackTime";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/PRs" element={<PersonalRecordTimes />}></Route>
           <Route path="/track/:id" element={<TrackTimes />}></Route>
           <Route path="/add" element={<AddTime />}></Route>
+          <Route path="/time/:id" element={<TrackTime />}></Route>
         </Routes>
       </Router>
     </div>
