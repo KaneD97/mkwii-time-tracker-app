@@ -41,7 +41,11 @@ const TrackTimesList = ({ track, trackTimes }) => {
                         {trackTime.time}
                       </Link>
                     </Table.Cell>
-                    <Table.Cell>{trackTime.format}</Table.Cell>
+                    <Table.Cell>
+                      {trackTime.format === "shortcut"
+                        ? "Shortcut"
+                        : "Non Shortcut"}
+                    </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
