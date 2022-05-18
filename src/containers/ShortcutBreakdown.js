@@ -26,7 +26,7 @@ const ShortcutBreakdown = ({ trackId }) => {
   useEffect(() => {
     const shortcutBreakdownState = [];
     laps.forEach((lap) => {
-      filteredShortcuts.forEach((shortcut) => {
+      filteredShortcuts?.forEach((shortcut) => {
         shortcutBreakdownState.push({
           lap,
           shortcutId: shortcut.shortcut_id,

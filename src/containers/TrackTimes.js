@@ -36,7 +36,7 @@ const TrackTimes = () => {
   }, [id]);
 
   useEffect(() => {
-    getTrackTimes();
+    getTrackTimes(dispatch);
   }, []);
 
   return <TrackTimesList track={track} trackTimes={trackTimes} />;

@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Icon, Table } from "semantic-ui-react";
 import { getTracks, getTrackTimes } from "../utils";
 
 const TrackTime = () => {
@@ -9,6 +11,7 @@ const TrackTime = () => {
   const trackTimes = useSelector((state) => state.trackTimes.trackTimes);
   const tracks = useSelector((state) => state.allTracks.tracks);
   const [trackTime, setTrackTime] = useState("");
+  const [shortcuts, setShortcuts] = useState([]);
 
   const getTrackTime = () => {
     if (trackTimes?.length > 0) {
@@ -28,20 +31,6 @@ const TrackTime = () => {
     }
   };
 
-  const trackTimeData = () => {
-    return (
-      <>
-        <h1>{trackTime.track}</h1>
-        <h1>{trackTime.time}</h1>
-        {trackTime.breakdown?.length > 0 ? (
-          <h2>Load shortcut</h2>
-        ) : (
-          <h2>Non-shortcut</h2>
-        )}
-      </>
-    );
-  };
-
   useEffect(() => {
     getTrackTime();
   }, [trackTimes, tracks]);
@@ -49,14 +38,55 @@ const TrackTime = () => {
   useEffect(() => {
     getTrackTimes(dispatch);
     getTracks(dispatch);
+    getShortcuts();
   }, []);
+
+  const getShortcuts = async () => {
+    const response = await axios
+      .get("http://127.0.0.1:5500/mock_data/shortcuts.json")
+      .catch((err) => console.log(err));
+    setShortcuts(response.data);
+  };
 
   return (
     <>
-      {trackTime !== "" ? (
-        <h1>{trackTimeData()}</h1>
-      ) : (
-        <h1>Unable to load data...</h1>
+      <h1>{trackTime.track}</h1>
+      <h1>{trackTime.time}</h1>
+      <h1>
+        Format: {trackTime.format === "shortcut" ? "Shortcut" : "Non Shortcut"}
+      </h1>
+      {trackTime.breakdown?.length > 0 && (
+        <Table celled structured>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell rowSpan="2">Shortcut</Table.HeaderCell>
+              <Table.HeaderCell rowSpan="2">Lap</Table.HeaderCell>
+              <Table.HeaderCell rowSpan="2">Shortcut achieved</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {trackTime.breakdown?.map((lapBreakdown) => (
+              <Table.Row>
+                <Table.Cell>
+                  {
+                    shortcuts
+                      .filter(
+                        (shortcut) =>
+                          shortcut.shortcut_id === lapBreakdown.shortcut_id
+                      )
+                      .shift()?.name
+                  }
+                </Table.Cell>
+                <Table.Cell>{lapBreakdown.lap_count}</Table.Cell>
+                <Table.Cell textAlign="center">
+                  {lapBreakdown.shortcut_achieved && (
+                    <Icon color="green" name="checkmark" size="large" />
+                  )}
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
       )}
     </>
   );
