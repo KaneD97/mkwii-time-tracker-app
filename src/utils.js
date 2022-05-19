@@ -24,4 +24,5 @@ export const getTrackTimes = async (dispatch) => {
     .get("http://127.0.0.1:5500/mock_data/track_times.json")
     .catch((err) => console.log(err));
   dispatch(setTrackTimes(response.data));
+  return response;
 };

@@ -19,6 +19,7 @@ const AddTime = () => {
   const [track, setTrack] = useState("");
   const [time, setTime] = useState("");
   const [format, setFormat] = useState("non_shortcut");
+  const [toggleMessage, setToggleMessage] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -38,7 +39,6 @@ const AddTime = () => {
     } else if (track === "") {
       alert("Forgot to select track!");
     } else {
-      alert(`Your time ${time} has been submitted! for ${track.value}`);
       const dateAchieved = getDateTimeToday();
       const formData = {
         time,
@@ -49,6 +49,7 @@ const AddTime = () => {
         format,
       };
       console.log(formData);
+      toggle();
     }
   };
 
@@ -68,19 +69,34 @@ const AddTime = () => {
     getTracks(dispatch);
   }, []);
 
+  const toggle = () => {
+    setToggleMessage((prev) => !prev);
+  };
+
   return (
     <div>
       <h1>Add Time</h1>
-      <AddTimeForm
-        tracks={tracks}
-        track={track}
-        time={time}
-        format={format}
-        handleFormat={handleFormat}
-        handleTrackChange={handleTrackChange}
-        handleSubmit={handleSubmit}
-        handleInputChange={handleInputChange}
-      ></AddTimeForm>
+      <div data-cy="add-time-form">
+        <AddTimeForm
+          tracks={tracks}
+          track={track}
+          time={time}
+          format={format}
+          handleFormat={handleFormat}
+          handleTrackChange={handleTrackChange}
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+        ></AddTimeForm>
+      </div>
+      {toggleMessage && (
+        <div class="ui success message">
+          <i class="close icon" onClick={toggle}></i>
+          <div class="header" data-cy="time-upload-success-message">
+            Your time of {time} was successfully uploaded for track{" "}
+            {track.value}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
