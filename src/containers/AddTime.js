@@ -76,6 +76,15 @@ const AddTime = () => {
   return (
     <div>
       <h1>Add Time</h1>
+      {toggleMessage && (
+        <div class="ui success message">
+          <i class="close icon" onClick={toggle}></i>
+          <div class="header" data-cy="time-upload-success-message">
+            Your time of {time} was successfully uploaded for track{" "}
+            {track.value}
+          </div>
+        </div>
+      )}
       <div data-cy="add-time-form">
         <AddTimeForm
           tracks={tracks}
@@ -88,15 +97,6 @@ const AddTime = () => {
           handleInputChange={handleInputChange}
         ></AddTimeForm>
       </div>
-      {toggleMessage && (
-        <div class="ui success message">
-          <i class="close icon" onClick={toggle}></i>
-          <div class="header" data-cy="time-upload-success-message">
-            Your time of {time} was successfully uploaded for track{" "}
-            {track.value}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -28,10 +28,14 @@ const PersonalRecordTimes = () => {
     fileDownload(csvString, "personal_times.csv");
   };
 
+  const divStyle = {
+    marginBottom: 10,
+  };
+
   return (
     <div>
       <h1>World Record Times!</h1>
-      <div data-cy="download-csv-button">
+      <div data-cy="download-csv-button" style={divStyle}>
         <Button primary onClick={downloadCsv}>
           Download all times!
         </Button>
