@@ -18,8 +18,10 @@ const AddTime = () => {
   );
   const [track, setTrack] = useState("");
   const [time, setTime] = useState("");
-  const [format, setFormat] = useState("non_shortcut");
-  const [toggleMessage, setToggleMessage] = useState(false);
+  const [format, setFormat] = useState("");
+  const [toggleSuccessMessage, setToggleSuccessMessage] = useState(false);
+  const [toggleErrorMessage, setToggleErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const dispatch = useDispatch();
 
@@ -34,10 +36,12 @@ const AddTime = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const validTimeRegExp = /0[0-2]:[0-5][0-9].[0-9][0-9][0-9]/g;
-    if (!validTimeRegExp.test(time)) {
-      alert("Invalid time entered!");
-    } else if (track === "") {
-      alert("Forgot to select track!");
+    if (time !== "" && !validTimeRegExp.test(time)) {
+      toggleError(true);
+      setErrorMessage("Invalid time entered!");
+    } else if (time === "" || track === "" || format === "") {
+      toggleError(true);
+      setErrorMessage("Forgot to enter data in one or more fields!");
     } else {
       const dateAchieved = getDateTimeToday();
       const formData = {
@@ -49,7 +53,8 @@ const AddTime = () => {
         format,
       };
       console.log(formData);
-      toggle();
+      toggleError(false);
+      toggleSuccess();
     }
   };
 
@@ -69,16 +74,28 @@ const AddTime = () => {
     getTracks(dispatch);
   }, []);
 
-  const toggle = () => {
-    setToggleMessage((prev) => !prev);
+  const toggleSuccess = () => {
+    setToggleSuccessMessage((prev) => !prev);
+  };
+
+  const toggleError = (newState) => {
+    setToggleErrorMessage(newState);
   };
 
   return (
     <div>
       <h1>Add Time</h1>
-      {toggleMessage && (
+      {toggleErrorMessage && (
+        <div class="ui negative message">
+          <i class="close icon" onClick={() => toggleError(false)}></i>
+          <div class="header" data-cy="time-upload-error-message">
+            {errorMessage}
+          </div>
+        </div>
+      )}
+      {toggleSuccessMessage && (
         <div class="ui success message">
-          <i class="close icon" onClick={toggle}></i>
+          <i class="close icon" onClick={toggleSuccess}></i>
           <div class="header" data-cy="time-upload-success-message">
             Your time of {time} was successfully uploaded for track{" "}
             {track.value}
