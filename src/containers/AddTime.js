@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddTimeForm from "../components/AddTimeForm";
@@ -45,16 +46,26 @@ const AddTime = () => {
     } else {
       const dateAchieved = getDateTimeToday();
       const formData = {
-        time,
-        name: track.value,
-        id: track.key,
-        dateAchieved,
-        shortcutBreakdown,
-        format,
+        track_id: track.key,
+        time: time,
+        format: format,
+        date_achieved: dateAchieved,
+        breakdown: shortcutBreakdown?.map((shortcut) => ({
+          shortcut_id: shortcut.shortcutId,
+          lap_count: shortcut.lap,
+          shortcut_achieved: shortcut.isChecked,
+        })),
       };
       console.log(formData);
-      toggleError(false);
-      toggleSuccess();
+      axios.post("http://localhost:3000/times/add", formData).then(
+        (response) => {
+          toggleError(false);
+          toggleSuccess();
+        },
+        (error) => {
+          toggleError(true);
+        }
+      );
     }
   };
 
@@ -86,17 +97,17 @@ const AddTime = () => {
     <div>
       <h1>Add Time</h1>
       {toggleErrorMessage && (
-        <div class="ui negative message">
-          <i class="close icon" onClick={() => toggleError(false)}></i>
-          <div class="header" data-cy="time-upload-error-message">
+        <div className="ui negative message">
+          <i className="close icon" onClick={() => toggleError(false)}></i>
+          <div className="header" data-cy="time-upload-error-message">
             {errorMessage}
           </div>
         </div>
       )}
       {toggleSuccessMessage && (
-        <div class="ui success message">
-          <i class="close icon" onClick={toggleSuccess}></i>
-          <div class="header" data-cy="time-upload-success-message">
+        <div className="ui success message">
+          <i className="close icon" onClick={toggleSuccess}></i>
+          <div className="header" data-cy="time-upload-success-message">
             Your time of {time} was successfully uploaded for track{" "}
             {track.value}
           </div>

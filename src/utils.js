@@ -14,7 +14,7 @@ export const getDateTimeToday = () => {
 
 export const getTracks = async (dispatch) => {
   const response = await axios
-    .get("http://127.0.0.1:5500/mock_data/tracks.json")
+    .get("http://localhost:3000/tracks")
     .catch((err) => console.log(err));
   dispatch(setTracks(response.data));
 };

@@ -39,7 +39,7 @@ const ShortcutBreakdown = ({ trackId }) => {
 
   const getShortcuts = async () => {
     const response = await axios
-      .get("http://127.0.0.1:5500/mock_data/shortcuts.json")
+      .get("http://localhost:3000/shortcuts")
       .catch((err) => console.log(err));
     setShortcuts(response.data);
   };
