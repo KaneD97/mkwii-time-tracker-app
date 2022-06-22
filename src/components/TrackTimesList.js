@@ -8,7 +8,7 @@ const TrackTimesList = ({ track, trackTimes }) => {
   const getFilteredTrackTimes = () => {
     if (trackTimes && track.id) {
       setFilteredTrackTimes(() =>
-        trackTimes?.filter((trackTime) => trackTime.track_id === track.id)
+        trackTimes?.filter((trackTime) => parseInt(trackTime.track_id) === track.id)
       );
     }
   };

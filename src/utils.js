@@ -19,10 +19,18 @@ export const getTracks = async (dispatch) => {
   dispatch(setTracks(response.data));
 };
 
-export const getTrackTimes = async (dispatch) => {
-  const response = await axios
-    .get("http://127.0.0.1:5500/mock_data/track_times.json")
+export const getTrackTimes = async (dispatch, trackId, trackTimeId) => {
+  if(trackId){
+    const response = await axios
+    .get(`http://localhost:3000/times/track/${trackId}`)
     .catch((err) => console.log(err));
-  dispatch(setTrackTimes(response.data));
-  return response;
+    dispatch(setTrackTimes(response.data));
+    return response;
+  } else if(trackTimeId){
+    const response = await axios
+    .get(`http://localhost:3000/times/${trackTimeId}`)
+    .catch((err) => console.log(err));
+    dispatch(setTrackTimes(response.data));
+    return response;
+  }
 };

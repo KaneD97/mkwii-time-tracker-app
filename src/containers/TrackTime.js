@@ -17,10 +17,10 @@ const TrackTime = () => {
     if (trackTimes?.length > 0) {
       setTrackTime(() => {
         const time = trackTimes
-          ?.filter((trackTime) => trackTime.track_time_id === parseInt(id))
+          ?.filter((trackTime) => trackTime.track_time_id === id)
           .shift();
         const track = tracks
-          .filter((track) => track.id === time?.track_id)
+          .filter((track) => track.id === parseInt(time?.track_id))
           .shift();
         if (time && track) {
           return { ...time, track: track?.name };
@@ -36,14 +36,14 @@ const TrackTime = () => {
   }, [trackTimes, tracks]);
 
   useEffect(() => {
-    getTrackTimes(dispatch);
+    getTrackTimes(dispatch,null,id);
     getTracks(dispatch);
     getShortcuts();
   }, []);
 
   const getShortcuts = async () => {
     const response = await axios
-      .get("http://127.0.0.1:5500/mock_data/shortcuts.json")
+      .get("http://localhost:3000/shortcuts")
       .catch((err) => console.log(err));
     setShortcuts(response.data);
   };
@@ -72,7 +72,7 @@ const TrackTime = () => {
                     shortcuts
                       .filter(
                         (shortcut) =>
-                          shortcut.shortcut_id === lapBreakdown.shortcut_id
+                          shortcut.shortcut_id === parseInt(lapBreakdown.shortcut_id)
                       )
                       .shift()?.name
                   }
