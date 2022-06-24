@@ -44,7 +44,7 @@ const ShortcutBreakdown = ({ trackId }) => {
 
   return (
     <div data-cy="shortcut-breakdown">
-      <h1>Shortcut breakdown</h1>
+      <h2>Shortcut breakdown</h2>
       {laps.map((lap) => (
         <React.Fragment key={lap}>
           <LapBreakdown shortcuts={filteredShortcuts} lapCount={lap} updateLapShortcut={updateLapShortcut} />
