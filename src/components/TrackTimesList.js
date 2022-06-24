@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Table } from "semantic-ui-react";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Table } from 'semantic-ui-react';
 
 const TrackTimesList = ({ track, trackTimes }) => {
   const [filteredTrackTimes, setFilteredTrackTimes] = useState([]);
 
   const getFilteredTrackTimes = () => {
     if (trackTimes && track.id) {
-      setFilteredTrackTimes(() =>
-        trackTimes?.filter((trackTime) => parseInt(trackTime.track_id) === track.id)
-      );
+      setFilteredTrackTimes(() => trackTimes?.filter((trackTime) => parseInt(trackTime.track_id) === track.id));
     }
   };
 
@@ -37,15 +35,9 @@ const TrackTimesList = ({ track, trackTimes }) => {
                 {filteredTrackTimes.map((trackTime) => (
                   <Table.Row>
                     <Table.Cell>
-                      <Link to={`/time/${trackTime.track_time_id}`}>
-                        {trackTime.time}
-                      </Link>
+                      <Link to={`/time/${trackTime.track_time_id}`}>{trackTime.time}</Link>
                     </Table.Cell>
-                    <Table.Cell>
-                      {trackTime.format === "shortcut"
-                        ? "Shortcut"
-                        : "Non Shortcut"}
-                    </Table.Cell>
+                    <Table.Cell>{trackTime.format === 'shortcut' ? 'Shortcut' : 'Non Shortcut'}</Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>

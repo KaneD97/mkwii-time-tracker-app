@@ -1,4 +1,4 @@
-import { ActionTypes } from "../constants/action-types";
+import { ActionTypes } from '../constants/action-types';
 
 const initialState = { tracks: [] };
 
@@ -41,10 +41,7 @@ export const shortcutBreakdownReducer = (state = {}, { type, payload }) => {
     case ActionTypes.LAP_SHORTCUT_UPDATED:
       return {
         data: state.data.map((lapShortcut) => {
-          if (
-            lapShortcut.lap === payload.lapCount &&
-            lapShortcut.shortcutId === payload.shortcutId
-          ) {
+          if (lapShortcut.lap === payload.lapCount && lapShortcut.shortcutId === payload.shortcutId) {
             return { ...lapShortcut, isChecked: payload.isChecked };
           }
           return lapShortcut;

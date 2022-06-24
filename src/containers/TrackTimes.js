@@ -1,14 +1,10 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import TrackTimesList from "../components/TrackTimesList";
-import {
-  removeSelectedTrack,
-  setSelectedTrack,
-  setTrackTimes,
-} from "../redux/actions/track-actions";
-import { getTracks, getTrackTimes } from "../utils";
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import TrackTimesList from '../components/TrackTimesList';
+import { removeSelectedTrack, setSelectedTrack, setTrackTimes } from '../redux/actions/track-actions';
+import { getTracks, getTrackTimes } from '../utils';
 
 const TrackTimes = () => {
   const { id } = useParams();
@@ -27,7 +23,7 @@ const TrackTimes = () => {
   }, [tracks]);
 
   useEffect(() => {
-    if (id && id !== "") {
+    if (id && id !== '') {
       getTracks(dispatch);
     }
     return () => {
@@ -36,7 +32,7 @@ const TrackTimes = () => {
   }, [id]);
 
   useEffect(() => {
-    getTrackTimes(dispatch,id);
+    getTrackTimes(dispatch, id);
   }, []);
 
   return <TrackTimesList track={track} trackTimes={trackTimes} />;

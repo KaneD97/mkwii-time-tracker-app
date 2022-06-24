@@ -1,10 +1,10 @@
-import React from "react";
-import TrackLinksList from "./TrackLinksList";
+import React from 'react';
+import TrackLinksList from './TrackLinksList';
 
 const TracksList = ({ tracks }) => {
   const divStyle = {
     paddingLeft: '2.5%',
-    paddingRight: '2%'
+    paddingRight: '2%',
   };
   return (
     <div className="four column wide">

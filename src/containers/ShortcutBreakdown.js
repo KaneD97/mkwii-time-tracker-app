@@ -1,11 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import LapBreakdown from "../components/LapBreakdown";
-import {
-  setLapShortcut,
-  setShortcutBreakdown,
-} from "../redux/actions/track-actions";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import LapBreakdown from '../components/LapBreakdown';
+import { setLapShortcut, setShortcutBreakdown } from '../redux/actions/track-actions';
 
 const ShortcutBreakdown = ({ trackId }) => {
   const [shortcuts, setShortcuts] = useState([]);
@@ -18,9 +15,7 @@ const ShortcutBreakdown = ({ trackId }) => {
   }, []);
 
   useEffect(() => {
-    setFilteredShortcuts(
-      shortcuts.filter((shortcut) => shortcut.track_id === trackId)
-    );
+    setFilteredShortcuts(shortcuts.filter((shortcut) => shortcut.track_id === trackId));
   }, [trackId, shortcuts]);
 
   useEffect(() => {
@@ -38,9 +33,7 @@ const ShortcutBreakdown = ({ trackId }) => {
   }, [filteredShortcuts]);
 
   const getShortcuts = async () => {
-    const response = await axios
-      .get("http://localhost:3000/shortcuts")
-      .catch((err) => console.log(err));
+    const response = await axios.get('http://localhost:3000/shortcuts').catch((err) => console.log(err));
     setShortcuts(response.data);
   };
 
@@ -54,11 +47,7 @@ const ShortcutBreakdown = ({ trackId }) => {
       <h1>Shortcut breakdown</h1>
       {laps.map((lap) => (
         <React.Fragment key={lap}>
-          <LapBreakdown
-            shortcuts={filteredShortcuts}
-            lapCount={lap}
-            updateLapShortcut={updateLapShortcut}
-          />
+          <LapBreakdown shortcuts={filteredShortcuts} lapCount={lap} updateLapShortcut={updateLapShortcut} />
         </React.Fragment>
       ))}
     </div>

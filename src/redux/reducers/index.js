@@ -1,10 +1,5 @@
-import { combineReducers } from "redux";
-import {
-  selectedTrackReducer,
-  shortcutBreakdownReducer,
-  trackReducer,
-  trackTimeReducer,
-} from "./trackReducer";
+import { combineReducers } from 'redux';
+import { selectedTrackReducer, shortcutBreakdownReducer, trackReducer, trackTimeReducer } from './trackReducer';
 
 export const reducers = combineReducers({
   allTracks: trackReducer,

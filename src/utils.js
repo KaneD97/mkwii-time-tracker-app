@@ -1,5 +1,5 @@
-import axios from "axios";
-import { setTracks, setTrackTimes } from "./redux/actions/track-actions";
+import axios from 'axios';
+import { setTracks, setTrackTimes } from './redux/actions/track-actions';
 
 export const getDateTimeToday = () => {
   const date = new Date();
@@ -13,23 +13,17 @@ export const getDateTimeToday = () => {
 };
 
 export const getTracks = async (dispatch) => {
-  const response = await axios
-    .get("http://localhost:3000/tracks")
-    .catch((err) => console.log(err));
+  const response = await axios.get('http://localhost:3000/tracks').catch((err) => console.log(err));
   dispatch(setTracks(response.data));
 };
 
 export const getTrackTimes = async (dispatch, trackId, trackTimeId) => {
-  if(trackId){
-    const response = await axios
-    .get(`http://localhost:3000/times/track/${trackId}`)
-    .catch((err) => console.log(err));
+  if (trackId) {
+    const response = await axios.get(`http://localhost:3000/times/track/${trackId}`).catch((err) => console.log(err));
     dispatch(setTrackTimes(response.data));
     return response;
-  } else if(trackTimeId){
-    const response = await axios
-    .get(`http://localhost:3000/times/${trackTimeId}`)
-    .catch((err) => console.log(err));
+  } else if (trackTimeId) {
+    const response = await axios.get(`http://localhost:3000/times/${trackTimeId}`).catch((err) => console.log(err));
     dispatch(setTrackTimes(response.data));
     return response;
   }
