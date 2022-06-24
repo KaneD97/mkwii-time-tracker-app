@@ -26,5 +26,9 @@ export const getTrackTimes = async (dispatch, trackId, trackTimeId) => {
     const response = await axios.get(`http://localhost:3000/times/${trackTimeId}`).catch((err) => console.log(err));
     dispatch(setTrackTimes(response.data));
     return response;
+  } else {
+    const response = await axios.get('http://localhost:3000/times').catch((err) => console.log(err));
+    dispatch(setTrackTimes(response.data));
+    return response;
   }
 };
