@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getTracks, getTrackTimes } from "../utils";
 import { Button } from "semantic-ui-react";
 import fileDownload from "js-file-download";
+import { Link } from "react-router-dom";
 
 const PersonalRecordTimes = () => {
   const dispatch = useDispatch();
@@ -34,11 +35,12 @@ const PersonalRecordTimes = () => {
 
   return (
     <div>
-      <h1>World Record Times!</h1>
-      <div data-cy="download-csv-button" style={divStyle}>
-        <Button primary onClick={downloadCsv}>
-          Download all times!
-        </Button>
+      <h1>All Tracks</h1>
+      <div style={divStyle}>
+      <Link to={`/add`}>
+        <Button positive size='big' icon='plus' content='Add Time'/>
+        </Link>
+      <Button primary onClick={downloadCsv} icon='download' size='big' content='Download times'/>
       </div>
       <Tracks></Tracks>
     </div>

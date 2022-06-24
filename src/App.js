@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Header></Header>
         <Routes>
-          <Route path="/PRs" element={<PersonalRecordTimes />}></Route>
+          <Route path="" element={<PersonalRecordTimes />}></Route>
           <Route path="/track/:id" element={<TrackTimes />}></Route>
           <Route path="/add" element={<AddTime />}></Route>
           <Route path="/time/:id" element={<TrackTime />}></Route>
