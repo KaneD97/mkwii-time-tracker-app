@@ -15,7 +15,7 @@ const AddTime = () => {
   const shortcutBreakdown = useSelector((state) => state.shortcutBreakdown.data);
   const [track, setTrack] = useState('');
   const [time, setTime] = useState('');
-  const [format, setFormat] = useState('');
+  const [format, setFormat] = useState('non_shortcut');
   const [toggleSuccessMessage, setToggleSuccessMessage] = useState(false);
   const [toggleErrorMessage, setToggleErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
