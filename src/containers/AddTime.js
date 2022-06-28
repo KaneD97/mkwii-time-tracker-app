@@ -46,6 +46,7 @@ const AddTime = () => {
         time: time,
         format: format,
         date_achieved: dateAchieved,
+        deleted: false,
         breakdown: shortcutBreakdown?.map((shortcut) => ({
           shortcut_id: shortcut.shortcutId,
           lap_count: shortcut.lap,
