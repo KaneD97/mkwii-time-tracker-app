@@ -7,7 +7,7 @@ const TrackLinksList = ({ tracks }) => {
   return tracks?.map((track) => {
     const { name, id, track_time_count } = track;
     return (
-      <div className="card" key={id} data-cy="track-link">
+      <div className="card" key={id} data-cy={`track-link-${name.toLowerCase().replace(" ","-")}`}>
         <Link to={`/track/${id}`}>
           <Card>
             <Image src={require(`../data/images/track_${id}.png`)} wrapped ui={false} />
