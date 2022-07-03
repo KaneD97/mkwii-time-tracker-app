@@ -68,7 +68,7 @@ const TrackTime = () => {
   return (
     <>
       {!trackDeleted ? (
-        <>
+        <div data-cy='track-time-data'>
           <h1>{trackTime.track}</h1>
           <div className="ui list">
             <div className="item">Time: {trackTime.time}</div>
@@ -100,16 +100,20 @@ const TrackTime = () => {
                   ))}
                 </Table.Body>
               </Table>
+              <div data-cy='delete-time-button'>
               <Button negative size="big" icon="trash" content="Delete Time" onClick={deleteTime} />
+              </div>
             </div>
           )}
-        </>
+        </div>
       ) : (
-        <div style={{margin: '0 30%'}}>
+        <div style={{margin: '0 30%'}} data-cy="track-deleted-message">
           <Message negative>
             <Message.Header>Track deleted</Message.Header>
             <p>If you deleted this by mistake then click 'Undo'</p>
+            <div data-cy='undo-delete-button'>
             <Button primary size="big" icon="trash" content="Undo" onClick={undoDelete}/>
+            </div>
           </Message>
         </div>
       )}
