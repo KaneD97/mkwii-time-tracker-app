@@ -50,7 +50,7 @@ const TrackTime = () => {
   };
 
   const deleteTime = async () => {
-    await axios.put(`http://localhost:3000/times/delete/${trackTime.track_time_id}`).catch((err) => console.log(err)).then((res) => {
+    await axios.patch(`http://localhost:3000/times/delete/${trackTime.track_time_id}`).catch((err) => console.log(err)).then((res) => {
       if(res.status === 200){
         setTrackDeleted(true);
       }
@@ -58,7 +58,7 @@ const TrackTime = () => {
   }
 
   const undoDelete = async () => {
-    await axios.put(`http://localhost:3000/times/undo/${trackTime.track_time_id}`).catch((err) => console.log(err)).then((res) => {
+    await axios.patch(`http://localhost:3000/times/undo/${trackTime.track_time_id}`).catch((err) => console.log(err)).then((res) => {
       if(res.status === 200){
         setTrackDeleted(false);
       }

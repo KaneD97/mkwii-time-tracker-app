@@ -13,7 +13,7 @@ const AddTimeForm = ({ tracks, track, time, format, handleFormat, handleTrackCha
         <Form.Group widths="equal">
           <Form.Field control={Select} label="Track" options={tracks} placeholder="Select track" onChange={handleTrackChange} />
           {track.has_shortcut && <Form.Field control={Select} label="Format" options={shortcutOptions} placeholder="Select format" onChange={handleFormat} />}
-          <Form.Field control={Input} label="Time" value={time} onChange={handleInputChange} placeholder="Enter time in format MM:SS:mmm" />
+          <Form.Field control={Input} label="Time" value={time} onChange={handleInputChange} placeholder="Enter time in format MM:SS.mmm" />
         </Form.Group>
         {format === 'shortcut' && <ShortcutBreakdown trackId={track.key} />}
         <div data-cy="submit-button" style={{ padding: 10 }}>
